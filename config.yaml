@@ -21,7 +21,7 @@ agents:
 # Paramètres d'apprentissage par renforcement
 reinforcement_learning:
   algorithm: "dqn"             # Algorithme à utiliser (dqn, ppo)
-  stateDimension: 32           # Dimension du vecteur d'état
+  stateDimension: 44           # Dimension du vecteur d'état
   actionDimension: 9           # Dimension du vecteur d'action
   learningRate: 0.001          # Taux d'apprentissage
   gamma: 0.99                  # Facteur d'actualisation
@@ -30,6 +30,7 @@ reinforcement_learning:
   minEpsilon: 0.01             # Epsilon minimal
   batchSize: 64                # Taille du batch d'apprentissage
   bufferSize: 100000           # Taille du tampon de replay
+  multiAgent: false             # Activer l'apprentissage multi-agent
   prioritizedExperience: true  # Utiliser Prioritized Experience Replay
   targetUpdateFrequency: 10    # Fréquence de mise à jour du réseau cible
   

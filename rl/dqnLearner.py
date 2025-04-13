@@ -14,7 +14,7 @@ import os
 from typing import Dict, List, Tuple, Optional, Union, Any
 
 from rl.valueNetwork import QNetwork
-from rl.replayBuffer import ReplayBuffer, PrioritizedReplayBuffer, MultiAgentReplayBuffer
+from rl.replayBuffer import ReplayBuffer, PrioritizedReplayBuffer, MultiAgentReplayBuffer, MultiAgentPrioritizedReplayBuffer
 from agents.collectiveAgent import CollectiveAgent
 
 
@@ -137,9 +137,18 @@ class DQNLearner:
 		# Initialiser l'optimiseur
 		self.optimizer = optim.Adam(self.qNetwork.parameters(), lr=learningRate)
 		
-		# Initialiser le tampon de replay
-		if multiAgent:
-			# Tampon multi-agents
+		# Initialiser le tampon de replay selon les options
+		if multiAgent and prioritizedExperience:
+			self.replayBuffer = MultiAgentPrioritizedReplayBuffer(
+				capacity=bufferSize,
+				batchSize=batchSize,
+				stateDimension=stateDimension,
+				alpha=alpha,
+				beta=beta,
+				balanceAgents=True
+			)
+		elif multiAgent:
+			# Tampon multi-agents standard
 			self.replayBuffer = MultiAgentReplayBuffer(
 				capacity=bufferSize,
 				batchSize=batchSize,

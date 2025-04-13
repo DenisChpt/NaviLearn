@@ -1,0 +1,71 @@
+# Configuration pour NaviLearn - Système d'apprentissage par renforcement pour navigation collective adaptative
+
+# Paramètres d'environnement
+environment:
+  width: 1000                  # Largeur du monde
+  height: 1000                 # Hauteur du monde
+  obstacleCount: 30            # Nombre d'obstacles
+  resourceCount: 15            # Nombre de ressources
+  weatherEnabled: true         # Activer les effets météorologiques
+  terrainComplexity: 0.7       # Complexité du terrain (0-1)
+
+# Paramètres des agents
+agents:
+  count: 10                    # Nombre d'agents
+  sensorRange: 150             # Portée des capteurs
+  communicationRange: 200      # Portée de communication
+  maxSpeed: 5.0                # Vitesse maximale
+  maxTurnRate: 0.4             # Taux de rotation maximal
+  memorySize: 1000             # Taille de la mémoire de connaissances
+
+# Paramètres d'apprentissage par renforcement
+reinforcement_learning:
+  algorithm: "dqn"             # Algorithme à utiliser (dqn, ppo)
+  stateDimension: 32           # Dimension du vecteur d'état
+  actionDimension: 9           # Dimension du vecteur d'action
+  learningRate: 0.001          # Taux d'apprentissage
+  gamma: 0.99                  # Facteur d'actualisation
+  epsilon: 1.0                 # Epsilon initial pour DQN
+  epsilonDecay: 0.995          # Taux de décroissance d'epsilon
+  minEpsilon: 0.01             # Epsilon minimal
+  batchSize: 64                # Taille du batch d'apprentissage
+  bufferSize: 100000           # Taille du tampon de replay
+  prioritizedExperience: true  # Utiliser Prioritized Experience Replay
+  targetUpdateFrequency: 10    # Fréquence de mise à jour du réseau cible
+  
+  # Paramètres spécifiques à PPO
+  ppoEpsilon: 0.2              # Paramètre de clipping pour PPO
+  valueCoefficient: 0.5        # Coefficient pour la perte de valeur
+  entropyCoefficient: 0.01     # Coefficient pour le terme d'entropie
+  clipRange: 0.2               # Plage de clipping pour PPO
+  epochsPerUpdate: 4           # Nombre d'époques par mise à jour
+
+# Paramètres d'entraînement
+training:
+  episodes: 100                # Nombre d'épisodes d'entraînement
+  evaluationFrequency: 10      # Fréquence d'évaluation
+  saveFrequency: 20            # Fréquence de sauvegarde du modèle
+
+# Paramètres de rendu
+rendering:
+  enabled: true                # Activer le rendu visuel
+  windowWidth: 1280            # Largeur de la fenêtre
+  windowHeight: 720            # Hauteur de la fenêtre
+  targetFPS: 60                # FPS cible
+  showStats: true              # Afficher les statistiques
+  showPaths: true              # Afficher les trajectoires
+  showSensors: true            # Afficher les capteurs
+  showCommunication: true      # Afficher les communications
+  use3D: true                  # Utiliser le rendu 3D si disponible
+  graphicalLevel: 2            # Niveau de détail graphique (0-3)
+
+# Paramètres de journalisation
+logging:
+  level: "INFO"                # Niveau de journalisation
+  saveStats: true              # Sauvegarder les statistiques
+  statsFile: "stats/stats.csv" # Fichier de statistiques
+
+# Paramètres d'analyse de performance
+profiling:
+  enabled: false               # Activer l'analyse de performance
+  sampleInterval: 100          # Intervalle d'échantillonnage
